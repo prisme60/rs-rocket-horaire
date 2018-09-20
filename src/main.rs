@@ -1,5 +1,5 @@
-#![feature(plugin, decl_macro)]
-#![feature(plugin, custom_derive)]
+#![feature(plugin)]
+#![feature(custom_derive)]
 #![plugin(rocket_codegen)]
 #[macro_use]
 extern crate lazy_static;
@@ -107,7 +107,7 @@ fn rt_sncf_arriv(station: String) -> content::Html<String> {
         sncf(station.as_str(), false).unwrap().iter(),
     ))
 }
-#[error(404)]
+#[catch(404)]
 fn rt_404(_req: &rocket::Request) -> content::Html<String> {
     content::Html(liste_url())
 }
@@ -143,6 +143,6 @@ fn main() {
                 files
             ],
         )
-        .catch(errors![rt_404])
+        .catch(catchers![rt_404])
         .launch();
 }
