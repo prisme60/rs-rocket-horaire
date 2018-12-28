@@ -107,6 +107,12 @@ fn rt_sncf_arriv(station: String) -> content::Html<String> {
         sncf(station.as_str(), false).unwrap().iter(),
     ))
 }
+
+#[get("/", format = "text/html")]
+fn rt_index() -> content::Html<String> {
+    content::Html(liste_url())
+}
+
 #[catch(404)]
 fn rt_404(_req: &rocket::Request) -> content::Html<String> {
     content::Html(liste_url())
@@ -135,6 +141,7 @@ fn main() {
         .mount(
             "/",
             routes![
+                rt_index,
                 rt_transilien,
                 rt_ratp,
                 rt_sncf_dest,
