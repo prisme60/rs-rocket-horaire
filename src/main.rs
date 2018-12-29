@@ -1,10 +1,9 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-#[macro_use] extern crate rocket;
-
 #[macro_use]
 extern crate lazy_static;
 
+#[macro_use]
 extern crate rocket;
 
 extern crate horaire;
@@ -132,7 +131,7 @@ struct Sms {
 
 #[post("/writeMsg", data = "<sms>")]
 fn write_msg(sms: LenientForm<Sms>) -> content::Html<String> {
-    match SMS_SERVICE.sms_user(sms.get().user.as_str(), sms.get().msg.as_str()) {
+    match SMS_SERVICE.sms_user(sms.user.as_str(), sms.msg.as_str()) {
         Ok(msg) | Err(msg) => content::Html(msg),
     }
 }
@@ -151,6 +150,6 @@ fn main() {
                 files
             ],
         )
-        .catch(catchers![rt_404])
+        .register(catchers![rt_404])
         .launch();
 }
