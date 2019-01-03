@@ -33,20 +33,21 @@ fn liste_url() -> String {
     let mut s = String::new();
     s.push_str("<h1>Transilien</h1>");
     let stations = [
-        ("Chars", "CHR"),
-        ("Conflans-Ste-Honorine", "CSH"),
-        ("Pontoise", "PSE"),
-        ("Sartrouville", "SVL"),
-        ("Cergy-Préfecture", "CYP"),
-        ("Paris-Saint-Lazare", "PSL"),
-        ("Nanterre-Université", "NUN"),
+        ("Chars", "CHARS"),
+        ("Conflans-Ste-Honorine", "CONFLANS SAINTE-HONORINE"),
+        ("Pontoise", "PONTOISE"),
+        ("Sartrouville", "SARTROUVILLE"),
+        ("Cergy-Préfecture", "CERGY PREFECTURE"),
+        ("Paris-Saint-Lazare", "GARE DE PARIS SAINT-LAZARE "),
+        ("Nanterre-Université", "NANTERRE UNIVERSITE"),
     ];
     for station in stations.iter() {
         s.push_str(
             format!(
                 "<a href=\"/transilien/{}\" >{}</a><p>",
                 station.1, station.0
-            ).as_str(),
+            )
+            .as_str(),
         );
     }
 
@@ -60,7 +61,8 @@ fn liste_url() -> String {
             format!(
                 "<a href=\"/ratp/{}/{}\" >{}</a><p>",
                 station.1, station.2, station.0
-            ).as_str(),
+            )
+            .as_str(),
         );
     }
 
@@ -75,7 +77,8 @@ fn liste_url() -> String {
             format!(
                 "<a href=\"/sncf/arriv/{}\" >{}</a><p>",
                 station.1, station.0
-            ).as_str(),
+            )
+            .as_str(),
         );
     }
 
