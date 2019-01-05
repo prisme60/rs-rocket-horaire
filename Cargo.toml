@@ -4,6 +4,9 @@ version = "0.2.0"
 authors = ["Christian FOUCHER <christian.foucher@gmail.com>"]
 edition = "2018"
 
+[profile.release]
+lto = true
+
 [dependencies]
 rocket = "*"
 rocket_codegen = "*"
