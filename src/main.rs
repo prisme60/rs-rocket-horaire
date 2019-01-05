@@ -1,27 +1,18 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-#[macro_use]
-extern crate lazy_static;
-
-#[macro_use]
-extern crate rocket;
-
-extern crate horaire;
-
-extern crate sms_freemobile_api;
-
-//use std::io;
 use std::path::{Path, PathBuf};
 
-use rocket::response::content;
-use rocket::response::NamedFile;
-//use rocket::response::status;
-use rocket::request::LenientForm;
+use rocket::{
+    request::LenientForm,
+    response::{content, NamedFile},
+    *,
+};
 
-use horaire::source::ratp::ratp;
-use horaire::source::sncf::sncf;
-use horaire::source::transilien::transilien;
-use horaire::timelines::get_time_lines_html;
+use horaire::{
+    source::{ratp::ratp, sncf::sncf, transilien::transilien},
+    timelines::get_time_lines_html,
+};
+use lazy_static::*;
 
 use sms_freemobile_api::sms_service::SmsService;
 
