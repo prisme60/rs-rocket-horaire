@@ -54,7 +54,7 @@ fn liste_url() -> String {
     s.push_str("<h1>RATP</h1>");
     let stations = [
         ("Auber", "A", "Auber"),
-        ("Le Vesinet le Pecq", "A", "Le Vesinet le Pecq"),
+        ("Le Vesinet le Pecq", "A", "Le Vesinet-Le Pecq"),
     ];
     for station in stations.iter() {
         s.push_str(
