@@ -24,19 +24,19 @@ fn liste_url() -> String {
     let mut s = String::new();
     s.push_str("<h1>Transilien</h1>");
     let stations = [
-        ("Chars", "CHARS"),
-        ("Conflans-Ste-Honorine", "CONFLANS SAINTE-HONORINE"),
-        ("Pontoise", "PONTOISE"),
-        ("Sartrouville", "SARTROUVILLE"),
-        ("Cergy-Préfecture", "CERGY PREFECTURE"),
-        ("Paris-Saint-Lazare", "GARE DE PARIS SAINT-LAZARE "),
-        ("Nanterre-Université", "NANTERRE UNIVERSITE"),
+        ("Chars", "CHARS", 8738119),
+        ("Conflans-Ste-Honorine", "CONFLANS SAINTE-HONORINE", 8738189),
+        ("Pontoise", "PONTOISE", 8727613),
+        ("Sartrouville", "SARTROUVILLE", 8738641),
+        ("Cergy-Préfecture", "CERGY PREFECTURE", 8738190),
+        ("Paris-Saint-Lazare", "GARE DE PARIS SAINT-LAZARE", 8738400),
+        ("Nanterre-Université", "NANTERRE UNIVERSITE", 8738631),
     ];
     for station in stations.iter() {
         s.push_str(
             format!(
-                "<a href=\"/transilien/{}\" >{}</a><p>",
-                station.1, station.0
+                "<a href=\"/transilien/{}/{}\" >{}</a><p>",
+                station.2, station.1, station.0
             )
             .as_str(),
         );
@@ -76,10 +76,10 @@ fn liste_url() -> String {
     s
 }
 
-#[get("/transilien/<station>", format = "text/html")]
-fn rt_transilien(station: String) -> content::Html<String> {
+#[get("/transilien/<uic>/<station>", format = "text/html")]
+fn rt_transilien(uic: u32, station: String) -> content::Html<String> {
     content::Html(get_time_lines_html(
-        transilien(station.as_str()).unwrap().iter(),
+        transilien(station.as_str(), uic).unwrap().iter(),
     ))
 }
 
